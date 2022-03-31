@@ -1,2 +1,2 @@
 # gridbot-websockets
-build a gridbot using real-time market data over websockets in powershell!
+build a gridbot using real-time market data using web api in powershell!
