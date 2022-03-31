@@ -1,7 +1,7 @@
 
 
 ##
-# URL & AUth Details:
+# URI & AUth Details:
 ##
 
 $TodayString = Get-Date -Format yyyy-MM-dd
@@ -13,16 +13,14 @@ $global:orders_uri = "/v2/orders"
 $global:Key = "xxxx"
 $global:Secret = "xxxxx"
 
-##
-# Sell Crypto
-##
-
 $global:auth_headers = @{
     "APCA-API-KEY-ID"     = $global:Key
     "APCA-API-SECRET-KEY" = $global:Secret
 }
 
 #grid bot settings
+
+$trading_symbol = "BTCUSD"
 
 $Num_Buy_Grid_lines = 0..15
 $Num_sell_Grid_lines = 0..15
@@ -38,11 +36,11 @@ $closed_order_ids = @()
 
 $first_buy_order_body = [ordered]@{    
 
-    "symbol"        = "BTCUSD"
+    "symbol"        = $trading_symbol
     "qty"           = 1
     "type"          = "market"
     "side"          = "buy"
-    #"limit_price"   = [int]($Current_Coin_Price.Current_Coin_Price) + 10
+    #"limit_price"   = xxx
     "time_in_force" = "gtc"
 
 }                
@@ -55,7 +53,7 @@ foreach ($i in $Num_Buy_Grid_lines) {
 
     $buy_order_bodys = [ordered]@{    
 
-        "symbol"        = "BTCUSD"
+        "symbol"        = $trading_symbol
         "qty"           = $position_size
         "type"          = "limit"
         "side"          = "buy"
@@ -71,7 +69,7 @@ foreach ($i in $Num_sell_Grid_lines) {
 
     $sell_order_bodys = [ordered]@{    
 
-        "symbol"        = "BTCUSD"
+        "symbol"        = $trading_symbol
         "qty"           = $position_size
         "type"          = "limit"
         "side"          = "sell"
@@ -109,7 +107,7 @@ while ($Loop  = $True) {
 
             $new_sell_order = [ordered]@{    
 
-                "symbol"        = "BTCUSD"
+                "symbol"        = $trading_symbol
                 "qty"           = $position_size
                 "type"          = "limit"
                 "side"          = "sell"
@@ -143,7 +141,7 @@ while ($Loop  = $True) {
             Write-Host "Creating new limit buy order at: $($new_buy_price)"
             $new_buy_order = [ordered]@{    
 
-                "symbol"        = "BTCUSD"
+                "symbol"        = $trading_symbol
                 "qty"           = $position_size
                 "type"          = "limit"
                 "side"          = "buy"
@@ -176,10 +174,3 @@ while ($Loop  = $True) {
         break
     }
 }
-
-
-
-
-#$buy_Order | Add-Member -MemberType NoteProperty -Name "pers_static_ID" -Value $buy_or_sell_index.pers_static_ID -Force
-#$buy_order | ConvertTo-Json | Out-File "C:\Play\ScriptBot\$($TodayString)\3-Buy-Sell\buy_$($buy_Order.id).json" -Force    
-
