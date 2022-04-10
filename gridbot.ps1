@@ -133,7 +133,7 @@ $first_Validate_Order | Add-Member -MemberType NoteProperty -Name "tax_transacti
 
 $Export_Tax_info = [PSCustomObject]@{            
 
-    Tax_buy_or_sell               = "Buy"
+    buy_or_sell               = "Buy"
     tax_date_time_transaction_utc = $first_Validate_Order.tax_date_time_transaction_utc
     tax_symbol                    = $first_Validate_Order.symbol
     tax_asset_class               = $first_Validate_Order.asset_class
